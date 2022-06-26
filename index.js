@@ -1,10 +1,14 @@
 //console.log('MyApp');
 
 const express = require('express');
-const faker = require('faker');
+const routerApi = require('./routes');
+/* Is Faker js gone?
+The Faker project was maintained by Marak Squires, an early-days impactful Node enthusiast and professional who went rogue and acted maliciously on January 4th, 2022. The package was deleted, and the project was abandoned.14 ene 2022 */
+// si saben como me quedo obsoleto para que me intentan implementar :s :P xD -.-" ... bye
+//const faker = require('@faker-js/faker');
 const cors = require('cors');
 const app = express();
-
+//const faker = require('faker');
 const port = 3000;
 app.use(cors());
 app.get('/', (req, res) => {
@@ -13,56 +17,8 @@ app.get('/', (req, res) => {
 app.get('/new-root', (req, res) => {
   res.send('<h1>hi, im new root<h1/>');
 });
-app.get('/products', (req, res) => {
-  const products = [];
-  for (let index = 0; index < 100; index++) {
-    //const element = array[index];
-    products.push({
-      name: faker.commerce.productName(),
-      price: parseInt(faker.commerce.price(), 10),
-      image: faker.image.imageUrl(),
-      //(faker.commerce.price(), 10),
-    });
-  }
-  res.json(products/* [
-    {
-      name: 'product 1',
-      price: 10,
-    },
-    {
-      name: 'product 12',
-      price: 120,
-    }
-  ] */);
-});
-app.get('/products/:id', (req, res) => {
-  const { id } = req.params;
-  res.json({
-    id,
-    name: 'product 2',
-    price: 2000
-  });
-});
-app.get('/users', (req, res) => {
-  const { limit, offset } = req.query;
-  if (limit && offset) {
-    res.json ({
-      limit,
-      offset
-    });
-  }else{
-    res.send('dont have parameters');
-  }
-});
-app.get('/categories/:categoryId/products/:productId', (req, res) => {
-  const { categoryId , productId} = req.params;
-  res.json({
-    categoryId,
-    productId,
-  });
-});
 
-
+routerApi(app);
 
 app.listen(port, () => {
   console.log(`mi port  + ${port}`);
