@@ -12,19 +12,13 @@ router.get('/', (req, res) => {
       price: parseInt(faker.commerce.price(), 10),
       image: faker.image.imageUrl(),
     })
-    res.json(
-      products
-      /* {
-      id: `${products[index]}`,
-      name: 'product 2',
-      price: 2000,
-    }*/);
   }
+    res.json(products);
 });
 router.get('/filter', (req, res) => {
   res.send('<h2>hi, im a filter <h2/>');
 });
-router.get(':id', (req, res) => {
+router.get('/:id', (req, res) => {
   const { id } = req.params;
   res.json({
     id,

@@ -1,5 +1,6 @@
 const express = require('express');
 const { route } = require('./productsRouter');
+const faker = require('faker');
 const router = express.Router();
 
 
