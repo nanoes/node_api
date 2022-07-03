@@ -11,6 +11,7 @@ const app = express();
 //const faker = require('faker');
 const port = 3000;
 app.use(cors());
+app.use(express.json());
 app.get('/', (req, res) => {
   res.send('<h1>hi, my server in express<h1/>');
 });
