@@ -13,6 +13,16 @@ const{logErrors, errorHandler, boomErrorHandler} = require('./middlewares/error.
 const app = express();
 //const faker = require('faker');
 const port = 3000;
+const whitelist =['http://localhost:8081','https://myapp.com' ];
+const options = {
+  origin: (origin, callback)=>{
+    if (whitelist.includes(origin)) {
+      callback(null, true);
+    }else{
+      callback(new newError('forbidden'))
+    }
+  }
+}
 app.use(cors());
 app.use(express.json());
 app.get('/', (req, res) => {
