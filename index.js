@@ -7,6 +7,9 @@ The Faker project was maintained by Marak Squires, an early-days impactful Node 
 // si saben como me quedo obsoleto para que me intentan implementar :s :P xD -.-" ... bye
 //const faker = require('@faker-js/faker');
 const cors = require('cors');
+
+const{logErrors, errorHandler, boomErrorHandler} = require('./middlewares/error.handler')
+
 const app = express();
 //const faker = require('faker');
 const port = 3000;
@@ -20,6 +23,10 @@ app.get('/new-root', (req, res) => {
 });
 
 routerApi(app);
+
+app.use(logErrors);
+app.use(boomErrorHandler);
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`mi port  + ${port}`);
